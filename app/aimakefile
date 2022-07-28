@@ -1,0 +1,117 @@
+
+LOCAL_MODULE := vos_sdk
+LOCAL_CFLAGS := -Wall -g -O0
+LOCAL_CFLAGS += -D_GNU_SOURCE
+LOCAL_CFLAGS += -std=c99
+
+LOCAL_SRC_DIRS 		 += ./component/aispeech/asr_processor/src
+#LOCAL_SRC_DIRS 		 += ./capture/alsa
+LOCAL_SRC_DIRS 		 += ./component/aispeech/th_processor/src
+
+LOCAL_SRC_DIRS 		 += ./component/aispeech/ghost/third/xlog/src
+LOCAL_SRC_DIRS 		 += ./component/aispeech/ghost/src/linux
+LOCAL_SRC_DIRS 		 += ./component/aispeech/ghost/src
+LOCAL_SRC_DIRS 		 += ./component/aispeech/player/impl/decoder
+LOCAL_SRC_DIRS 		 += ./component/aispeech/player/impl/preprocessor
+LOCAL_SRC_DIRS 		 += ./component/aispeech/player/impl/device
+LOCAL_SRC_DIRS 		 += ./component/aispeech/player/src
+LOCAL_SRC_DIRS 		 += ./component/aispeech/player_manager/src
+
+LOCAL_SRC_DIRS 		 += ./component/third/faad2/libfaad
+LOCAL_SRC_DIRS 		 += ./component/third/helix_mp3/src
+LOCAL_SRC_DIRS 		 += ./component/third/tsdemux/src
+LOCAL_SRC_DIRS 		 += ./component/aispeech/webclient
+LOCAL_SRC_DIRS 		 += ./component/aispeech/factory_test/src
+
+LOCAL_SRC_FILES 		 := ./app/src/main.c
+LOCAL_SRC_FILES 		 += ./app/src/taskstack.c
+LOCAL_SRC_FILES 		 += ./app/src/app_skill.c 
+LOCAL_SRC_FILES 		 += ./app/src/app_vol_ctrl.c
+LOCAL_SRC_FILES 		 += ./app/src/factory_test.c
+LOCAL_SRC_FILES 		 += ./app/src/utils.c
+LOCAL_SRC_FILES 		 += ./app/src/lstLib.c
+LOCAL_SRC_FILES 		 += ./app/src/voice_message_prase.c
+LOCAL_SRC_FILES 		 += ./app/src/protocol_conversion.c
+#LOCAL_SRC_FILES 		 += ./component/aispeech/ghost/src/gh.c
+#LOCAL_SRC_FILES 		 += ./component/aispeech/ghost/src/gh_queue.c
+#LOCAL_SRC_FILES 		 += ./component/aispeech/ghost/src/gh_ringbuf.c
+
+LOCAL_SRC_FILES 		 += ./component/third/cJSON/cJSON.c
+LOCAL_SRC_FILES 		 += ./component/third/ping/src/netstatus.c
+LOCAL_SRC_FILES 		 += ./component/aispeech/monitor/src/monitor_process.c
+LOCAL_SRC_FILES 		 += ./component/aispeech/protocol_third/src/msgtothird.c
+LOCAL_SRC_FILES 		 += ./component/aispeech/tinyhttpd/src/myhttpd.c
+
+LOCAL_CFLAGS += -I ./component/aispeech/asr_processor/include
+LOCAL_CFLAGS += -I ./component/aispeech/th_processor/include
+#LOCAL_CFLAGS += -I ./capture
+LOCAL_CFLAGS += -I ./app/include
+#LOCAL_CFLAGS += -I ./capture/alsa
+LOCAL_CFLAGS += -I ./component/aispeech/ghost/third/xlog/include
+LOCAL_CFLAGS += -I ./component/aispeech/ghost/include
+LOCAL_CFLAGS += -I ./component
+LOCAL_CFLAGS += -I ./component/aispeech/player/impl/decoder
+LOCAL_CFLAGS += -I ./component/aispeech/player/impl/device
+LOCAL_CFLAGS += -I ./component/aispeech/player/impl/preprocessor
+LOCAL_CFLAGS += -I ./component/aispeech/player_manager/include
+LOCAL_CFLAGS += -I ./component/third/faad2
+LOCAL_CFLAGS += -I ./component/third/faad2/libfaad
+LOCAL_CFLAGS += -I ./component/third/faad2/include
+LOCAL_CFLAGS += -I ./component/third/helix_mp3/include
+LOCAL_CFLAGS += -I ./component/third/tsdemux/include
+LOCAL_CFLAGS += -I ./component/aispeech/webclient/include
+LOCAL_CFLAGS += -I ./component/aispeech/player/include
+LOCAL_CFLAGS += -I ./component/third/ping/include
+LOCAL_CFLAGS += -I ./component/aispeech/monitor/include
+LOCAL_CFLAGS += -I ./library/dds/
+LOCAL_CFLAGS += -I ./library/TH/
+LOCAL_CFLAGS += -I ./component/aispeech/protocol_third/include
+LOCAL_CFLAGS += -I ./library/duilite/
+LOCAL_CFLAGS += -I ./component/aispeech/tinyhttpd/include
+LOCAL_CFLAGS += -I ./component/third/cJSON
+LOCAL_CFLAGS += -I ./component/aispeech/factory_test/include
+
+
+#启动DDS
+LOCAL_CFLAGS += -D DDS_ENABLE
+#使用太行采集板
+LOCAL_CFLAGS += -D USE_TH_PROCESS
+#使用本地vad
+LOCAL_CFLAGS += -D USE_LOCAL_VAD
+#启用本地ASR识别
+LOCAL_CFLAGS += -D USE_LOCAL_ASR  
+LOCAL_CFLAGS += -D LOCAL_ASR_IN_TH
+LOCAL_CFLAGS += -D USE_TIMEOUT
+#测试模式
+#LOCAL_CFLAGS += -D USE_TEST_MODE
+#使用全双工模式
+LOCAL_CFLAGS += -D USE_DDS_FULL_DUPLEX
+
+LOCAL_CXXFLAGS := -Wall -O2
+
+LOCAL_LDFLAGS := -L ./library/dds -ldds
+#LOCAL_LDFLAGS += -L ./component/aispeech -laispeech
+
+LOCAL_LDFLAGS += -L ./component/aispeech/player -lplayer
+LOCAL_LDFLAGS += -L ./component/aispeech/ghost -lghost
+LOCAL_LDFLAGS += -L ./component/aispeech/player_manager -lplayer_manager
+
+LOCAL_LDFLAGS += -L ./library/duilite -lauth_rk3126
+LOCAL_LDFLAGS += -L ./library/duilite -lduilite-rk3126-1.42.2-7-20220412185621-Release
+
+LOCAL_LDFLAGS += -L ./library/TH -lthfesp_upgrade
+LOCAL_LDFLAGS += -L ./library/TH -laispeechaudio
+
+LOCAL_LDFLAGS += -lpthread -lasound -lrt -ldl
+
+LOCAL_CFLAGS += -DMG_ENABLE_SSL=1 -DMG_SSL_IF=MG_SSL_IF_MBEDTLS -I./component/third/mbedtls-2.7.0/include
+LOCAL_SRC_DIRS += ./component/third/mbedtls-2.7.0/library
+
+LOCAL_LDFLAGS += -Wl,-rpath=./library/duilite
+LOCAL_LDFLAGS += -Wl,-rpath=./library/dds
+LOCAL_LDFLAGS += -Wl,-rpath=./library/device_upload
+LOCAL_LDFLAGS += -Wl,-rpath=./library/TH
+
+include $(BUILD_EXECUTABLE)
+#include $(BUILD_STATIC_LIBRARY)
+#include $(BUILD_SHARED_LIBRARY)

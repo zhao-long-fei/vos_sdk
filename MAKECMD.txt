@@ -1,0 +1,1 @@
+./build/aimake.sh -t platform -f app/aimakefile 

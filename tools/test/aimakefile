@@ -1,0 +1,61 @@
+DUILITE_VERSION := 1.32.0
+
+#LOCAL_MODULE := sspe_demo
+LOCAL_MODULE := test_thupgrade_dfu
+LOCAL_CFLAGS := -Wall -g -O0
+LOCAL_CFLAGS += -D_GNU_SOURCE  
+LOCAL_CFLAGS += -D__USE_GNU
+LOCAL_CFLAGS += -std=c99
+LOCAL_SRC_FILES := ./third/cJSON/cJSON.c
+
+#测试duilite
+#LOCAL_SRC_FILES += ./test/duilite_sspe.c
+#测试太行固件
+#LOCAL_SRC_FILES += ./test/test_thwkpupgrade.c
+#测试接收消息的管道程序
+#LOCAL_SRC_FILES += ./test/readfifo.c
+#测试云端VAD功能
+#LOCAL_SRC_FILES += ./test/test_cloud_vad.c
+#测试升级固件功能(非dfu)
+#LOCAL_SRC_FILES += ./test/test_thfesp_download.c
+#测试太行信号后处理版本
+LOCAL_SRC_FILES += ./test/test_thupgrade_dfu.c
+#测试与追觅通信的demo
+#LOCAL_SRC_FILES += ./test/msgsub.c
+#LOCAL_SRC_FILES += ./test/msg_pub.c
+
+#LOCAL_SRC_FILES += ./test/mymalloc.c
+
+#LOCAL_SRC_FILES += ./third/ghost/src/gh.c
+#LOCAL_SRC_FILES += ./third/ghost/src/gh_queue.c
+#LOCAL_SRC_FILES += ./third/ghost/src/gh_ringbuf.c
+
+LOCAL_CFLAGS += -I ./third/cJSON
+LOCAL_CFLAGS += -I ./third/ghost/third/xlog/include
+LOCAL_CFLAGS += -I ./third/ghost/include
+#LOCAL_SRC_DIRS 		 += ./third/ghost/third/xlog/src
+#LOCAL_SRC_DIRS 		 += ./third/ghost/src/linux
+LOCAL_CFLAGS += -DRUNTIME
+
+#LOCAL_CFLAGS += -I ./library/dds/
+#LOCAL_CFLAGS += -I ./TH_processor/include/
+#LOCAL_CFLAGS += -I ./library/duilite/$(DUILITE_VERSION)/
+#LOCAL_CFLAGS += -I ./
+#DUILITE_SUFFIX := _sspe
+#LOCAL_CFLAGS += -D FRONT_ENABLE_SSPE
+
+LOCAL_LDFLAGS += -ldl
+LOCAL_LDFLAGS += -L ./library/TH/$(TARGET_PLATFORM) -laispeechaudio -lthfesp_upgrade -lduilite -ldds_upload -lauth_aarch64-x3m-linux
+#LOCAL_LDFLAGS += -L ./library/duilite/$(DUILITE_VERSION)/$(TARGET_PLATFORM) -lduilite$(DUILITE_SUFFIX)
+#LOCAL_LDFLAGS += -L ./library/duilite/$(DUILITE_VERSION)/$(TARGET_PLATFORM) -lauth_tina
+LOCAL_LDFLAGS += -lpthread -lasound -lrt -ldl
+
+#LOCAL_LDFLAGS += -L ./library/dds/$(TARGET_PLATFORM) -ldds
+
+#LOCAL_LDFLAGS += -Wl,-rpath=./test
+#LOCAL_LDFLAGS += -Wl,-rpath=./library/dds/$(TARGET_PLATFORM)
+#LOCAL_LDFLAGS += -Wl,-rpath=./library/duilite/$(DUILITE_VERSION)/$(TARGET_PLATFORM)
+LOCAL_LDFLAGS += -Wl,-rpath=./library/TH/$(TARGET_PLATFORM)
+
+include $(BUILD_EXECUTABLE)
+#include $(BUILD_SHARED_LIBRARY)

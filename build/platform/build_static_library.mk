@@ -1,0 +1,1 @@
+ALL = $(STATIC_LIBRARY)

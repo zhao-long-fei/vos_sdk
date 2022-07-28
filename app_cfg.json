@@ -1,0 +1,57 @@
+{
+    "asr_processor":{
+        "dds":{
+            "productId": "279603116",
+            "aliasKey":"test",
+	        "productSecret":"e42dc1dc126f159d7c2c0376d42df9a5",
+	        "productKey":"db6afad4a029fd86b28d3e7d46613cf4"
+        },
+        "vad":{
+            "cfg":{
+                "resBinPath":"./library/res/vad_aihome_v0.12c.bin",
+                "pauseTime":400
+            },
+            "beginTimeout": 5000,
+            "endTimeout": 10000
+        },
+        "asr":{       
+            "cfg":{
+                "resBinPath":"./library/res/ebnfr_ais_lasr_phn_v1.1_220304.bin",  
+                "netBinPath":"./library/res/zhuimi_phn.grammar.bin"
+            },
+            "param":{
+		        "env":"use_pinyin=1;rec_wrd_sep=\"\";"
+	        }
+        },
+	    "speak_timeout":0
+    },
+    "TH_processor":{
+	    "dfu_enable":1,
+        "fw_path":"./TH12_WKP_ASR_HONGYAN_4_PANEL_V4.5.09_202205271021.fw",
+	    "fw_version":"TH12_WKP_ASR_HONGYAN_4_PANEL_V4.5.09_202205271021",
+        "th_sdk_cfg":{
+            "sample_bit":16,
+            "sample_rate":16000,
+            "origin_channels":6,
+            "aec_channels":4,
+            "beforming_channels":3,
+            "wakeup_channels":1,
+            "debug_origin":0,
+            "debug_beforming":0,
+            "log_enable":0
+        }
+    },
+    "app":{
+        "networkOnline":1,
+        "wakeup":[
+            {"word":"xiaomeixiaomei", "audio":"./app/audio/major.mp3"}
+        ],
+        "vad":{
+            "beginTimeoutAudio":"./app/audio/speech_begin_timeout.mp3",
+            "endTimeoutAudio":"./app/audio/speech_end_timeout.mp3"
+        },
+        "network":{
+            "errorAudio":"./app/audio/network_error.mp3"
+        }
+    }
+}

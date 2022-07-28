@@ -1,0 +1,24 @@
+GHOST工程
+目的
+    为了方便应用开发和降低开发者自行实现多线程通信组件的难度，故开发ghost工程
+    特点
+        跨平台
+
+    具体包括一下模块
+    ringbuf
+    queue
+    thread
+    mutex
+    semaphore(binary/count)
+    event_groups
+    timer
+    xlog
+    threadpool
+
+    其中queue/mailbox只能有一个消费者
+    ringbuf只能是一个生产者一个消费者
+
+接口中timeout参数的说明
+    -1:永久等待
+    0:检查一次
+    >0:指定时间(ms)

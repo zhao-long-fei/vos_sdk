@@ -1,0 +1,28 @@
+.
+├── app
+│   ├── include
+│   └── src
+├── component
+│   ├── aispeech
+│   └── thrid
+├── build
+├── tools
+├── vos_daemon
+├── audio
+├── library
+├── tools
+
+app: 业务主要代码目录，包含main.c
+vos_daemon：守护进程示例
+component：基本组件目录
+build：编译目录
+audio: 音频目录
+library: 依赖库
+tools: 若干自测工具
+
+函数接口说明：
+1：void start_fct_test_mode(int mode)
+
+
+
+

@@ -1,0 +1,11 @@
+player manager内部存在prompt和media播放对象，分别负责prompt和media的播放
+
+player manager采用状态机与任务栈的形式构建
+
+prompt对象只能被终止，media对象可以被终止也可以被暂停。
+
+player manager有四个状态，分别是idle/prompt playing/media playing/media paused状态；
+某一时刻player manager必然处于某个特定状态下。
+
+情景分析
+P代表prompt；M代表media。

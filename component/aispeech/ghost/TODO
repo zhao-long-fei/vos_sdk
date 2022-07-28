@@ -1,0 +1,2 @@
+添加对RT-THEAD支持
+gh_timer timer_create存在内存泄漏-->后面采用timerfd_create重新实现

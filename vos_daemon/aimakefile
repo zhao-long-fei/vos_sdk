@@ -1,0 +1,10 @@
+LOCAL_MODULE := vos_daemon
+LOCAL_CFLAGS := -Wall -O0
+LOCAL_CFLAGS += -D_GNU_SOURCE
+LOCAL_CFLAGS += -std=c99
+LOCAL_SRC_FILES := ./vos_daemon/vos_daemon.c
+
+LOCAL_CXXFLAGS := -Wall -O2
+LOCAL_LDFLAGS += -lpthread
+
+include $(BUILD_EXECUTABLE)
